@@ -1,7 +1,7 @@
 add_executable(serenec serene.cpp)
 
 # Make sure to generate files related to the dialects first
-add_dependencies(serenec SereneDialectGen)
+#add_dependencies(serenec SereneDialectGen)
 
 if (CPP_20_SUPPORT)
   target_compile_features(serenec PRIVATE cxx_std_20)
@@ -21,6 +21,14 @@ target_link_libraries(serenec PRIVATE
   MLIRSideEffectInterfaces
   MLIRTransforms
   LLVMX86AsmParser
+  LLVMOption
+  #clangTooling
+  clangDriver
+  clangBasic
+  clangdSupport
+  clangFrontend
+  clangEdit
+  clangLex
   )
 
 
@@ -29,4 +37,3 @@ target_include_directories(serene PRIVATE ${INCLUDE_DIR})
 
 install(TARGETS serenec DESTINATION bin)
 install(FILES "${PROJECT_BINARY_DIR}/config.h" DESTINATION include)
-cotire(serenec)
