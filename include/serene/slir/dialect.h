@@ -27,6 +27,7 @@
 #include "mlir/IR/BuiltinOps.h"
 #include "mlir/IR/Dialect.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
+#include "mlir/Interfaces/ControlFlowInterfaces.h"
 
 // Include the auto-generated header file containing the declaration of the
 // serene's dialect.

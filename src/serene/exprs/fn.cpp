@@ -133,23 +133,29 @@ void Fn::generateIR(serene::Namespace &ns, mlir::ModuleOp &m) {
       mlir::DictionaryAttr::get(builder.getContext(), arguments),
       builder.getStringAttr("public"));
 
+
   if (!fn) {
     m.emitError(llvm::formatv("Can't create the function '{0}'", name));
+    return;
   }
 
-  auto *entryBlock = new mlir::Block();
   auto &body       = fn.body();
+  auto *entryBlock = new mlir::Block();
+
   body.push_back(entryBlock);
+
   builder.setInsertionPointToStart(entryBlock);
   auto retVal = builder.create<slir::ValueOp>(loc, 0).getResult();
 
-  mlir::ReturnOp returnOp = builder.create<mlir::ReturnOp>(loc, retVal);
+  slir::ReturnOp returnOp = builder.create<slir::ReturnOp>(loc, retVal);
 
   if (!returnOp) {
     m.emitError(
         llvm::formatv("Can't create the return value of function '{0}'", name));
+    fn.erase();
     return;
   }
+
   m.push_back(fn);
 };
 } // namespace exprs

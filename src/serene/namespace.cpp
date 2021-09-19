@@ -30,6 +30,7 @@
 #include "serene/llvm/IR/Value.h"
 #include "serene/slir/slir.h"
 
+#include <mlir/IR/Verifier.h>
 #include <llvm/ADT/StringRef.h>
 #include <llvm/Support/FormatVariadic.h>
 #include <llvm/Support/raw_ostream.h>
@@ -79,6 +80,12 @@ MaybeModuleOp Namespace::generate() {
 
   for (auto &x : getTree()) {
     x->generateIR(*this, module);
+  }
+
+  if(mlir::failed(mlir::verify(module))) {
+    module.emitError("Can't verify the module");
+    module.erase();
+    return MaybeModuleOp::error(true);
   }
 
   if (mlir::failed(runPasses(module))) {
