@@ -24,6 +24,7 @@
 
 #include "serene/namespace.h"
 
+#include "mlir/IR/OperationSupport.h"
 #include "serene/context.h"
 #include "serene/errors/constants.h"
 #include "serene/exprs/expression.h"
@@ -110,6 +111,10 @@ void Namespace::dump() {
     return;
   }
 
+  // mlir::OpPrintingFlags flags;
+  // flags.enableDebugInfo();
+
+  // maybeModuleOp.getValue()->print(llvm::outs(), flags);
   maybeModuleOp.getValue()->dump();
 };
 

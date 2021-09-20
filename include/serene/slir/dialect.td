@@ -109,6 +109,8 @@ def ReturnOp: Serene_Op<"return", [NoSideEffect, HasParent<"FnOp">,
     }];
 
     let arguments = (ins AnyType:$operand);
+    let assemblyFormat =
+          [{ attr-dict $operand  `:` type($operand) }];
 
     // let verifier = [{ return serene::sir::verify(*this); }];
 
