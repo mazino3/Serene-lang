@@ -111,11 +111,10 @@ void Namespace::dump() {
     return;
   }
 
-  // mlir::OpPrintingFlags flags;
-  // flags.enableDebugInfo();
+  mlir::OpPrintingFlags flags;
+  flags.enableDebugInfo();
 
-  // maybeModuleOp.getValue()->print(llvm::outs(), flags);
-  maybeModuleOp.getValue()->dump();
+  maybeModuleOp.getValue()->print(llvm::outs(), flags);
 };
 
 MaybeModule Namespace::compileToLLVM() {
@@ -134,7 +133,7 @@ MaybeModule Namespace::compileToLLVM() {
   return MaybeModule::error(true);
 };
 
-Namespace::~Namespace(){};
+  Namespace::~Namespace(){};
 
 std::shared_ptr<Namespace>
 makeNamespace(SereneContext &ctx, llvm::StringRef name,

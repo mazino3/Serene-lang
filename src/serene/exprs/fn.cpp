@@ -127,7 +127,6 @@ void Fn::generateIR(serene::Namespace &ns, mlir::ModuleOp &m) {
         argSym->name, mlir::TypeAttr::get(builder.getI64Type())));
   }
 
-  // auto funcType = builder.getFunctionType(arg_types, builder.getI64Type());
   auto fn = builder.create<slir::FnOp>(
       loc, builder.getI64Type(), name,
       mlir::DictionaryAttr::get(builder.getContext(), arguments),

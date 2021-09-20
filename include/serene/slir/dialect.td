@@ -47,7 +47,7 @@ def ValueOp: Serene_Op<"value"> {
     let arguments = (ins I64Attr:$value);
     let results = (outs I64);
 
-    // let verifier = [{ return serene::sir::verify(*this); }];
+    //let verifier = [{ return serene::sir::verify(*this); }];
 
     let builders = [
         OpBuilder<(ins "int":$value), [{
@@ -80,25 +80,7 @@ def FnOp: Serene_Op<"fn", [
     let regions = (region AnyRegion:$body);
     let results = (outs I64);
 
-  // let builders = [
-  //     OpBuilder<(ins
-  //       "llvm::StringRef":$name, "mlir::FunctionType":$type,
-  //       CArg<"llvm::ArrayRef<mlir::NamedAttribute>", "{}">:$attrs,
-  //       CArg<"llvm::ArrayRef<mlir::DictionaryAttr>", "{}">:$argAttrs)
-  // >];
-
-  // let extraClassDeclaration = [{
-  //   static FnOp create(mlir::Location location, llvm::StringRef name, mlir::FunctionType type,
-  //                      llvm::ArrayRef<mlir::NamedAttribute> attrs = {});
-    // static FnOp create(mlir::Location location, llvm::StringRef name, mlir::FunctionType type,
-    //                    mlir::Operation::dialect_attr_range attrs);
-    // static FnOp create(mlir::Location location, llvm::StringRef name, mlir::FunctionType type,
-    //                    llvm::ArrayRef<mlir::NamedAttribute> attrs,
-    //                    llvm::ArrayRef<mlir::DictionaryAttr> argAttrs);
-    // }];
 }
-
-
 
 def ReturnOp: Serene_Op<"return", [NoSideEffect, HasParent<"FnOp">,
                                    ReturnLike, Terminator]> {
@@ -111,18 +93,6 @@ def ReturnOp: Serene_Op<"return", [NoSideEffect, HasParent<"FnOp">,
     let arguments = (ins AnyType:$operand);
     let assemblyFormat =
           [{ attr-dict $operand  `:` type($operand) }];
-
-    // let verifier = [{ return serene::sir::verify(*this); }];
-
-    // let builders = [
-    //     OpBuilder<(ins "int":$value), [{
-    //     // Build from fix 64 bit int
-    //     build(odsBuilder, odsState, odsBuilder.getI64Type(), (uint64_t) value);
-    //     }]>,
-    // ];
 }
-
-
-
 
 #endif // SERENE_DIALECT
