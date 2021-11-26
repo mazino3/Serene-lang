@@ -509,7 +509,8 @@ This framework allows for transforming a set of illegal operations to a set of l
 *** Rewrite Patterns
 *** Type Converter
 ** Full vs Partial Conversion
-* Episode 12 - Target code generation
+* DONE Episode 12 - Target code generation
+CLOSED: [2021-11-04 Thu 00:57]
 ** Updates:
 *** JIT work
 *** Emacs dev mode
@@ -561,3 +562,25 @@ and tries to =resolve= *undefined* symbols
 ** Let's look at some code
 ** Resources:
 - [[https://lwn.net/Articles/276782/][20 part linker essay]]
+* Episode 13 - Source Manager
+** LLVM Meetup 2021
+*** Tons of amazing talks
+*** The community is expanding
+- A screencast on how to get started with a FOSS project
+
+** Updates:
+- Still JIT
+- We're going to start the JIT discussion from next EP
+
+** Forgot to show case the code generation
+I didn't show it in action
+
+** What is a source manager
+- It owns and manages are the source buffers
+- All of our interactions with source files will happen though Source manager
+  - Including reading files
+  - Loading namespaces
+  - Including namespaces
+  - ...
+
+- LLVM provides a =SourceMgr= class that we're not using it
